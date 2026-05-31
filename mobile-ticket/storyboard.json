@@ -9,6 +9,8 @@
     "venue": "올림픽홀"
   },
   "bookingNumber": "B2026-0612-8842",
+  "figmaUrl": "",
+  "designSystemRef": "BERIZ Design System (색·컴포넌트는 디자인 시스템 토큰명으로만 참조)",
   "tickets": [
     {
       "seat": "스탠딩 A 152번",
