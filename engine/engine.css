@@ -2,6 +2,7 @@
   --ink: #2B2B2B; --gray: #8C8C8C; --line: #C9C9C9; --line-soft: #E3E3E3;
   --box: #ECECEC; --box-2: #F4F4F4; --bg: #FBFBFB; --accent: #5B5B5B;
   --ok: #2E7D32; --err: #C62828; --link: #2563EB;
+  --pin: #5B61E8; /* 주석핀 포인트 컬러 (유일한 포인트 색) */
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 body { font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; }
@@ -55,6 +56,18 @@ body { font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard", "Malgun 
 .ticket.is-used { position: relative; }
 .ticket.is-used .show, .ticket.is-used .booking, .ticket.is-used .qr-area { opacity: .5; }
 .ticket.is-used::after { content: "사용완료"; position: absolute; top: 44%; left: 50%; transform: translate(-50%,-50%) rotate(-12deg); border: 2px dashed var(--gray); color: var(--gray); font-size: 18px; font-weight: 900; padding: 5px 14px; border-radius: 8px; letter-spacing: 2px; }
+
+/* ===== 주석핀 (화면 요소 ↔ 설명 연결) ===== */
+.show, .booking, .qr-area, .status, .pager { position: relative; }
+.pin { position: absolute; top: 7px; left: 7px; width: 19px; height: 19px; border-radius: 50%;
+  background: var(--pin); color: #fff; font-size: 11px; font-weight: 800; line-height: 19px; text-align: center;
+  z-index: 6; box-shadow: 0 1px 3px rgba(0,0,0,.25); cursor: pointer; transition: transform .12s; }
+.pin:hover, .pin.act { transform: scale(1.18); }
+.pager .pin { top: 50%; left: 14px; transform: translateY(-50%); }
+.pager .pin:hover, .pager .pin.act { transform: translateY(-50%) scale(1.18); }
+.block { transition: border-color .12s, box-shadow .12s; }
+.block.hl { border-color: var(--pin); box-shadow: 0 0 0 2px rgba(91,97,232,.18); }
+.block .tag.num { background: var(--pin); }
 
 /* ===== 오른쪽 패널 ===== */
 .docs h2 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }

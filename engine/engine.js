@@ -81,29 +81,34 @@
   }
 
   /* ===== 화면(목업) 렌더 ===== */
+  // 화면 요소에 붙는 주석핀 (해당 설명의 순번과 연결)
+  function pin(id) { const i = DATA.components.findIndex(c => c.id === id); return i < 0 ? '' : `<span class="pin" data-idx="${i}">${i + 1}</span>`; }
+
   function renderMockup() {
     const s = DATA.show, scroll = $('scroll');
     scroll.innerHTML = DATA.tickets.map(t => {
       const used = t.status === 'used';
       const statusHtml = used
-        ? `<div class="status used"><span class="ico">✓</span>사용완료${t.usedAt ? ' · ' + esc(t.usedAt) + ' 입장' : ''}</div>`
-        : `<div class="status unused"><span class="ico">○</span>입장 가능</div>`;
+        ? `<div class="status used">${pin('status')}<span class="ico">✓</span>사용완료${t.usedAt ? ' · ' + esc(t.usedAt) + ' 입장' : ''}</div>`
+        : `<div class="status unused">${pin('status')}<span class="ico">○</span>입장 가능</div>`;
       return `<div class="ticket${used ? ' is-used' : ''}">
-        <div class="show"><div class="poster">포스터</div>
+        <div class="show">${pin('show')}<div class="poster">포스터</div>
           <div class="show-info"><div class="cat">${esc(s.category)}</div><div class="name">${esc(s.name)}</div>
             <div class="meta">${esc(s.datetime)} · ${esc(s.venue)}</div></div></div>
         <div class="field-tag">예매정보</div>
-        <div class="booking">
+        <div class="booking">${pin('booking')}
           <div class="row"><span class="k">예매번호</span><span class="v">${esc(DATA.bookingNumber)}</span></div>
           <div class="row"><span class="k">좌석</span><span class="v"><span class="seat-badge">${esc(t.seat)}</span></span></div>
           <div class="row"><span class="k">매수</span><span class="v">1매 (${esc(t.index)})</span></div>
         </div>
-        <div class="qr-area"><div class="qr-label">QR 코드</div><div class="qr">${qrCells(hashSeed(t.qrCode))}</div><div class="qr-code">${esc(t.qrCode)}</div></div>
+        <div class="qr-area">${pin('qr')}<div class="qr-label">QR 코드</div><div class="qr">${qrCells(hashSeed(t.qrCode))}</div><div class="qr-code">${esc(t.qrCode)}</div></div>
         ${statusHtml}</div>`;
     }).join('');
 
     const total = DATA.tickets.length, dotsEl = $('dots');
     dotsEl.innerHTML = DATA.tickets.map((_, i) => `<span class="dot${i === 0 ? ' on' : ''}"></span>`).join('');
+    const pager = document.querySelector('.pager');
+    if (pager && !pager.querySelector('.pin')) pager.insertAdjacentHTML('afterbegin', pin('scroll'));
     $('pagerLabel').textContent = '1 / ' + total;
     scroll.onscroll = () => {
       const idx = Math.round(scroll.scrollLeft / scroll.clientWidth);
@@ -114,11 +119,33 @@
 
   function renderDescriptions() {
     $('descList').innerHTML = DATA.components.map((c, i) =>
-      `<div class="block"><span class="tag">${CIRCLED[i] || ''} ${esc(c.label)}</span>
+      `<div class="block" data-idx="${i}"><span class="tag num">${i + 1} ${esc(c.label)}</span>
         <textarea data-id="${esc(c.id)}" placeholder="${esc(c.label)} 설명을 적어주세요">${esc(c.description || '')}</textarea></div>`
     ).join('');
     if (location.search.includes('view'))
       document.querySelectorAll('#descList textarea').forEach(t => t.setAttribute('readonly', ''));
+  }
+
+  /* ===== 핀 ↔ 설명 연동 (hover 하이라이트 / 클릭 스크롤) ===== */
+  function highlight(idx, on) {
+    document.querySelectorAll(`#descList .block[data-idx="${idx}"]`).forEach(b => b.classList.toggle('hl', on));
+    document.querySelectorAll(`.pin[data-idx="${idx}"]`).forEach(p => p.classList.toggle('act', on));
+  }
+  function wirePins() {
+    document.querySelectorAll('.pin').forEach(p => {
+      const idx = p.dataset.idx;
+      p.addEventListener('mouseenter', () => highlight(idx, true));
+      p.addEventListener('mouseleave', () => highlight(idx, false));
+      p.addEventListener('click', () => {
+        const b = document.querySelector(`#descList .block[data-idx="${idx}"]`);
+        if (b) { b.scrollIntoView({ behavior: 'smooth', block: 'center' }); b.classList.add('hl'); setTimeout(() => b.classList.remove('hl'), 1200); }
+      });
+    });
+    document.querySelectorAll('#descList .block').forEach(b => {
+      const idx = b.dataset.idx;
+      b.addEventListener('mouseenter', () => document.querySelectorAll(`.pin[data-idx="${idx}"]`).forEach(p => p.classList.add('act')));
+      b.addEventListener('mouseleave', () => document.querySelectorAll(`.pin[data-idx="${idx}"]`).forEach(p => p.classList.remove('act')));
+    });
   }
 
   function renderFigma() {
@@ -250,7 +277,7 @@
     $('saveTokenBtn').onclick = saveToken;
     try { const res = await fetch('storyboard.json?ts=' + Date.now()); DATA = await res.json(); }
     catch (e) { setStatus('err', 'storyboard.json 을 불러오지 못했어요.'); return; }
-    applyMeta(); renderMockup(); renderDescriptions(); renderFigma();
+    applyMeta(); renderMockup(); renderDescriptions(); renderFigma(); wirePins();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
