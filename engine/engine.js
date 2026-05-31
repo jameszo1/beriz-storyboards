@@ -40,14 +40,15 @@
       </div>
       <div class="page">
         <div class="stage">
-          <p class="wf-note">⚠️ 와이어프레임 (의도/구성 전달용) · 실제 디자인은 Figma 참조</p>
+          <div class="screen-label" id="screenLabel">화면</div>
           <div class="phone"><div class="screen">
-            <div class="statusbar"></div>
+            <div class="statusbar"><span>9:41</span><span class="sys">5G<b class="bat"></b></span></div>
             <div class="app-header"><span class="back">‹</span><span class="title" id="scAppTitle">화면</span></div>
             <div class="pager"><span class="label" id="pagerLabel">1 / 1</span></div>
             <div class="dots" id="dots"></div>
             <div class="ticket-scroll" id="scroll"></div>
           </div></div>
+          <p class="wf-note">⚠️ 와이어프레임 (의도·구성 전달용) · 실제 디자인은 Figma 참조</p>
         </div>
         <div class="docs">
           <h2>화면 설명서 (Spec)</h2>
@@ -162,6 +163,7 @@
   function applyMeta() {
     $('scTitle').textContent = DATA.screen || '스토리보드';
     $('scAppTitle').textContent = DATA.screen || '화면';
+    $('screenLabel').textContent = DATA.screen || '화면';
     document.title = (DATA.screen || '스토리보드') + ' · 와이어프레임';
   }
 
