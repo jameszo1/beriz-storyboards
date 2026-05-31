@@ -6,26 +6,15 @@
 <title>베리즈 · 모바일 티켓 스토리보드</title>
 <style>
   :root {
-    --beriz: #6C2BD9;
-    --beriz-light: #8B5CF6;
-    --beriz-dark: #4C1D95;
-    --ink: #1A1A1E;
-    --gray: #8A8A92;
-    --line: #ECECF0;
-    --bg: #F4F4F7;
-    --used: #B0B0B8;
-    --ok: #16A34A;
-    --err: #DC2626;
+    --beriz: #6C2BD9; --beriz-light: #8B5CF6; --beriz-dark: #4C1D95;
+    --ink: #1A1A1E; --gray: #8A8A92; --line: #ECECF0; --bg: #F4F4F7;
+    --used: #B0B0B8; --ok: #16A34A; --err: #DC2626;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-  body {
-    font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif;
-    background: var(--bg); color: var(--ink); line-height: 1.5;
-  }
+  body { font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; }
   .page { display: flex; gap: 48px; max-width: 1120px; margin: 0 auto; padding: 32px 32px 64px; align-items: flex-start; flex-wrap: wrap; }
   .stage { flex: 0 0 auto; }
   .docs { flex: 1; min-width: 340px; }
-
   .topbar { max-width: 1120px; margin: 0 auto; padding: 28px 32px 0; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
   .topbar h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
   .topbar .badge { font-size: 12px; font-weight: 700; color: var(--beriz); background: #F1EAFE; padding: 4px 10px; border-radius: 999px; }
@@ -34,67 +23,57 @@
   .phone { width: 360px; background: #000; border-radius: 44px; padding: 12px; box-shadow: 0 30px 60px rgba(76,29,149,.18), 0 4px 12px rgba(0,0,0,.1); }
   .screen { background: #fff; border-radius: 34px; overflow: hidden; height: 740px; display: flex; flex-direction: column; position: relative; }
   .notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 26px; background: #000; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; z-index: 30; }
-
   .app-header { padding: 38px 20px 14px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); }
   .app-header .back { font-size: 20px; color: var(--ink); }
   .app-header .title { font-size: 17px; font-weight: 700; }
-
   .pager { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 0 4px; }
   .pager .label { font-size: 13px; color: var(--gray); font-weight: 600; }
   .dots { display: flex; gap: 6px; justify-content: center; padding-bottom: 4px; }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
   .dot.on { background: var(--beriz); width: 18px; border-radius: 3px; }
-
   .ticket-scroll { flex: 1; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding: 8px 20px 20px; scrollbar-width: none; }
   .ticket-scroll::-webkit-scrollbar { display: none; }
   .ticket { flex: 0 0 100%; scroll-snap-align: center; background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,.05); }
-
   .show { background: linear-gradient(135deg, var(--beriz) 0%, var(--beriz-light) 100%); color: #fff; padding: 18px 18px 16px; display: flex; gap: 14px; }
   .poster { width: 64px; height: 84px; border-radius: 10px; flex: 0 0 auto; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 11px; color: rgba(255,255,255,.8); text-align: center; }
   .show-info { display: flex; flex-direction: column; justify-content: center; }
   .show-info .cat { font-size: 11px; opacity: .85; font-weight: 600; }
   .show-info .name { font-size: 17px; font-weight: 800; margin: 2px 0 6px; letter-spacing: -0.02em; }
   .show-info .meta { font-size: 12px; opacity: .9; }
-
   .booking { padding: 16px 18px; border-bottom: 1px dashed var(--line); }
   .row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; }
   .row .k { color: var(--gray); }
   .row .v { font-weight: 700; color: var(--ink); }
   .seat-badge { display: inline-block; background: #F1EAFE; color: var(--beriz); font-weight: 800; font-size: 12px; padding: 3px 8px; border-radius: 6px; }
-
   .qr-area { padding: 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .qr { width: 150px; height: 150px; border-radius: 12px; padding: 10px; background: #fff; border: 1px solid var(--line); }
   .qr svg { width: 100%; height: 100%; }
   .qr-code { font-size: 12px; color: var(--gray); letter-spacing: 1px; }
-
   .status { text-align: center; padding: 12px; font-weight: 800; font-size: 14px; border-top: 1px solid var(--line); }
   .status.unused { color: var(--beriz); background: #FAF7FF; }
   .status.used { color: var(--used); background: #F7F7F9; }
   .status .ico { margin-right: 6px; }
-
-  .ticket.is-used { position: relative; }
   .ticket.is-used .show, .ticket.is-used .booking, .ticket.is-used .qr-area { filter: grayscale(1); opacity: .55; }
+  .ticket.is-used { position: relative; }
   .ticket.is-used::after { content: "사용완료"; position: absolute; top: 46%; left: 50%; transform: translate(-50%,-50%) rotate(-14deg); border: 3px solid var(--used); color: var(--used); font-size: 22px; font-weight: 900; padding: 6px 16px; border-radius: 10px; letter-spacing: 2px; opacity: .85; }
 
   .docs h2 { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
   .docs .sub { font-size: 13px; color: var(--gray); margin-bottom: 20px; }
+  .docs .sub code { background:#EEE; padding:1px 5px; border-radius:4px; }
   .desc-block { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
   .desc-block .tag { display: inline-block; font-size: 11px; font-weight: 800; color: #fff; background: var(--beriz); padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
-  .desc-block textarea { width: 100%; border: none; resize: vertical; min-height: 64px; font-family: inherit; font-size: 14px; line-height: 1.6; color: var(--ink); background: transparent; outline: none; }
-  .desc-block textarea[readonly] { color: var(--ink); }
+  .desc-block textarea { width: 100%; border: none; resize: vertical; min-height: 60px; font-family: inherit; font-size: 14px; line-height: 1.6; color: var(--ink); background: transparent; outline: none; }
   .desc-block textarea::placeholder { color: #C4C4CC; }
 
-  /* 배포 영역 */
   .deploy-bar { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
-  .deploy-bar button { background: var(--beriz); color: #fff; border: none; font-weight: 800; font-size: 14px; padding: 12px 20px; border-radius: 10px; cursor: pointer; }
+  .deploy-bar button { border: none; font-weight: 800; font-size: 14px; padding: 12px 18px; border-radius: 10px; cursor: pointer; }
+  .deploy-bar .primary { background: var(--beriz); color: #fff; }
+  .deploy-bar .secondary { background: #F1EAFE; color: var(--beriz); margin-left: 8px; }
   .deploy-bar button:disabled { opacity: .5; cursor: not-allowed; }
-  .deploy-bar .gear { background: none; border: none; color: var(--gray); font-size: 13px; cursor: pointer; padding: 0; font-weight: 600; }
+  .deploy-bar .gear { background: none; color: var(--gray); font-size: 13px; padding: 0; margin-left: 12px; font-weight: 600; }
   .deploy-status { font-size: 13px; margin-top: 10px; min-height: 18px; }
-  .deploy-status.ok { color: var(--ok); }
-  .deploy-status.err { color: var(--err); }
-  .deploy-status.busy { color: var(--gray); }
+  .deploy-status.ok { color: var(--ok); } .deploy-status.err { color: var(--err); } .deploy-status.busy { color: var(--gray); }
   .deploy-status a { color: var(--beriz); font-weight: 700; }
-
   .settings { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); display: none; }
   .settings.open { display: block; }
   .settings label { font-size: 12px; font-weight: 700; color: var(--gray); display: block; margin-bottom: 6px; }
@@ -103,246 +82,178 @@
   .settings .save-key { margin-top: 8px; background: #F1EAFE; color: var(--beriz); }
   .settings .note { font-size: 12px; color: var(--gray); margin-top: 8px; line-height: 1.5; }
   .settings .note b { color: var(--ink); }
-
-  /* 뷰어 모드(설명 읽기 전용)일 때 편집 UI 숨김 */
-  body.viewer .deploy-bar { display: none; }
-  body.viewer .sub-edit { display: none; }
+  body.viewer .deploy-bar, body.viewer .sub-edit { display: none; }
+  body.viewer .desc-block textarea { color: var(--ink); }
 </style>
 </head>
 <body>
   <div class="topbar">
     <h1>모바일 티켓</h1>
     <span class="badge">스토리보드</span>
-    <span class="hint">← 티켓을 좌우로 스크롤(스와이프)하면 여러 장이 넘어갑니다</span>
+    <span class="hint">← 티켓을 좌우로 스크롤하면 여러 장이 넘어갑니다</span>
   </div>
 
   <div class="page">
-    <!-- ===== 화면 목업 ===== -->
     <div class="stage">
       <div class="phone">
         <div class="screen">
           <div class="notch"></div>
-          <div class="app-header">
-            <span class="back">‹</span>
-            <span class="title">모바일 티켓</span>
-          </div>
-          <div class="pager"><span class="label" id="pagerLabel">1 / 3</span></div>
+          <div class="app-header"><span class="back">‹</span><span class="title">모바일 티켓</span></div>
+          <div class="pager"><span class="label" id="pagerLabel">1 / 1</span></div>
           <div class="dots" id="dots"></div>
-
-          <div class="ticket-scroll" id="scroll">
-            <!-- 티켓 1 -->
-            <div class="ticket">
-              <div class="show">
-                <div class="poster">POSTER</div>
-                <div class="show-info">
-                  <div class="cat">콘서트</div><div class="name">2026 BERIZ LIVE</div>
-                  <div class="meta">2026.06.14 (토) 18:00<br>올림픽홀</div>
-                </div>
-              </div>
-              <div class="booking">
-                <div class="row"><span class="k">예매번호</span><span class="v">B2026-0612-8842</span></div>
-                <div class="row"><span class="k">좌석</span><span class="v"><span class="seat-badge">스탠딩 A 152번</span></span></div>
-                <div class="row"><span class="k">매수</span><span class="v">1매 (1/3)</span></div>
-              </div>
-              <div class="qr-area"><div class="qr"></div><div class="qr-code">B2026-0612-8842-01</div></div>
-              <div class="status unused"><span class="ico">●</span>입장 가능</div>
-            </div>
-            <!-- 티켓 2 -->
-            <div class="ticket">
-              <div class="show">
-                <div class="poster">POSTER</div>
-                <div class="show-info">
-                  <div class="cat">콘서트</div><div class="name">2026 BERIZ LIVE</div>
-                  <div class="meta">2026.06.14 (토) 18:00<br>올림픽홀</div>
-                </div>
-              </div>
-              <div class="booking">
-                <div class="row"><span class="k">예매번호</span><span class="v">B2026-0612-8842</span></div>
-                <div class="row"><span class="k">좌석</span><span class="v"><span class="seat-badge">스탠딩 A 153번</span></span></div>
-                <div class="row"><span class="k">매수</span><span class="v">1매 (2/3)</span></div>
-              </div>
-              <div class="qr-area"><div class="qr"></div><div class="qr-code">B2026-0612-8842-02</div></div>
-              <div class="status unused"><span class="ico">●</span>입장 가능</div>
-            </div>
-            <!-- 티켓 3 (사용완료) -->
-            <div class="ticket is-used">
-              <div class="show">
-                <div class="poster">POSTER</div>
-                <div class="show-info">
-                  <div class="cat">콘서트</div><div class="name">2026 BERIZ LIVE</div>
-                  <div class="meta">2026.06.14 (토) 18:00<br>올림픽홀</div>
-                </div>
-              </div>
-              <div class="booking">
-                <div class="row"><span class="k">예매번호</span><span class="v">B2026-0612-8842</span></div>
-                <div class="row"><span class="k">좌석</span><span class="v"><span class="seat-badge">스탠딩 A 154번</span></span></div>
-                <div class="row"><span class="k">매수</span><span class="v">1매 (3/3)</span></div>
-              </div>
-              <div class="qr-area"><div class="qr"></div><div class="qr-code">B2026-0612-8842-03</div></div>
-              <div class="status used"><span class="ico">✓</span>사용완료 · 06.14 17:42 입장</div>
-            </div>
-          </div>
+          <div class="ticket-scroll" id="scroll"><!-- storyboard.json 에서 자동 생성 --></div>
         </div>
       </div>
     </div>
 
-    <!-- ===== 설명 + 배포 영역 ===== -->
     <div class="docs">
       <h2>화면 설명 (Description)</h2>
-      <p class="sub">각 영역에 설명을 적고 <b>[저장 및 배포]</b>를 누르면 팀원 모두에게 반영됩니다. <span class="sub-edit">(읽기 전용으로 열려면 주소 끝에 <code>?view</code>)</span></p>
+      <p class="sub">화면·설명은 모두 <code>storyboard.json</code> 한 파일에서 나옵니다(사람용 화면 + AI용 데이터 동일 원본). 설명을 적고 <b>[저장 및 배포]</b>를 누르세요. <span class="sub-edit">읽기 전용 공유는 주소 끝에 <code>?view</code>.</span></p>
 
-      <!-- 배포 바 -->
       <div class="deploy-bar">
-        <button id="deployBtn" onclick="deploy()">💾 저장 및 배포</button>
-        <button class="gear" onclick="toggleSettings()" style="margin-left:12px;">⚙️ 배포 설정</button>
+        <button class="primary" id="deployBtn" onclick="deploy()">💾 저장 및 배포</button>
+        <button class="secondary" onclick="copyMarkdown()">📄 위키용 마크다운 복사</button>
+        <button class="gear" onclick="toggleSettings()">⚙️ 배포 설정</button>
         <div class="deploy-status" id="deployStatus"></div>
-
         <div class="settings" id="settings">
           <label>GitHub 액세스 토큰 (이 브라우저에만 저장, 외부로 안 나감)</label>
-          <input type="password" id="tokenInput" placeholder="github_pat_... 또는 ghp_..." />
+          <input type="password" id="tokenInput" placeholder="github_pat_..." />
           <button class="save-key" onclick="saveToken()">토큰 저장</button>
-          <p class="note">
-            <b>토큰이란?</b> 이 버튼이 GitHub에 파일을 올릴 수 있게 해주는 "열쇠"예요.<br>
-            한 번만 등록하면 됩니다. 토큰은 <b>이 컴퓨터 브라우저에만</b> 저장되고 화면(코드)에는 들어가지 않아요.<br>
-            ⚠️ 공용 PC에서는 등록하지 마세요.
-          </p>
+          <p class="note"><b>토큰이란?</b> 이 버튼이 GitHub에 파일을 올릴 수 있게 해주는 "열쇠"예요. 한 번만 등록하면 됩니다. ⚠️ 공용 PC에서는 등록하지 마세요.</p>
         </div>
       </div>
 
-      <div class="desc-block"><span class="tag">① 공연정보</span>
-        <textarea data-key="show" placeholder="예) 포스터, 공연명, 일시, 장소를 표시. 공연 24시간 전부터 QR 활성화."></textarea></div>
-      <div class="desc-block"><span class="tag">② 예매정보</span>
-        <textarea data-key="booking" placeholder="예) 예매번호는 동일, 좌석/매수는 티켓마다 다름. n매 중 몇 번째인지 표시."></textarea></div>
-      <div class="desc-block"><span class="tag">③ QR코드</span>
-        <textarea data-key="qr" placeholder="예) 입장 시 스캔. 보안을 위해 갱신 주기 검토. 캡처 방지 정책 필요."></textarea></div>
-      <div class="desc-block"><span class="tag">④ 사용상태</span>
-        <textarea data-key="status" placeholder="예) 미사용=보라 '입장 가능', 사용완료=회색+도장+입장시각."></textarea></div>
-      <div class="desc-block"><span class="tag">⑤ 여러 장 스크롤</span>
-        <textarea data-key="scroll" placeholder="예) 1개 예매번호에 여러 매. 좌우 스와이프로 이동, 상단에 n/총매수 표시."></textarea></div>
+      <div id="descList"><!-- 설명 편집칸 자동 생성 --></div>
     </div>
   </div>
 
 <script>
-  /* ===== 배포 대상 설정 ===== */
-  const REPO = {
-    owner: 'jameszo1',
-    name: 'beriz-storyboards',
-    branch: 'main',
-    path: 'mobile-ticket/descriptions.json'
-  };
-  const PAGES_URL = location.origin + location.pathname; // 현재 페이지가 곧 공유 링크
+  /* ===== 배포 대상 ===== */
+  const REPO = { owner: 'jameszo1', name: 'beriz-storyboards', branch: 'main', path: 'mobile-ticket/storyboard.json' };
+  const PAGES_URL = location.origin + location.pathname;
+  let DATA = null; // storyboard.json 원본
 
-  /* ===== 가짜 QR 패턴 ===== */
-  function makeQR(el, seed) {
-    const N = 21, cell = 150 / N; let rng = seed;
-    const rand = () => (rng = (rng * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
-    let r = `<svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg"><rect width="150" height="150" fill="#fff"/>`;
-    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++)
-      if (rand() > 0.5) r += `<rect x="${x*cell}" y="${y*cell}" width="${cell}" height="${cell}" fill="#1A1A1E"/>`;
-    const finder = (fx, fy) => `<rect x="${fx}" y="${fy}" width="${cell*7}" height="${cell*7}" fill="#1A1A1E"/><rect x="${fx+cell}" y="${fy+cell}" width="${cell*5}" height="${cell*5}" fill="#fff"/><rect x="${fx+cell*2}" y="${fy+cell*2}" width="${cell*3}" height="${cell*3}" fill="#1A1A1E"/>`;
-    r += finder(0,0) + finder(cell*14,0) + finder(0,cell*14) + `</svg>`;
-    el.innerHTML = r;
+  /* ===== 유틸 ===== */
+  const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  function hashSeed(str){ let h=2166136261; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619);} return (h>>>0)||7919; }
+  function makeQR(el, seed){
+    const N=21, cell=150/N; let rng=seed;
+    const rand=()=>(rng=(rng*1103515245+12345)&0x7fffffff)/0x7fffffff;
+    let r=`<svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg"><rect width="150" height="150" fill="#fff"/>`;
+    for(let y=0;y<N;y++)for(let x=0;x<N;x++) if(rand()>0.5) r+=`<rect x="${x*cell}" y="${y*cell}" width="${cell}" height="${cell}" fill="#1A1A1E"/>`;
+    const f=(fx,fy)=>`<rect x="${fx}" y="${fy}" width="${cell*7}" height="${cell*7}" fill="#1A1A1E"/><rect x="${fx+cell}" y="${fy+cell}" width="${cell*5}" height="${cell*5}" fill="#fff"/><rect x="${fx+cell*2}" y="${fy+cell*2}" width="${cell*3}" height="${cell*3}" fill="#1A1A1E"/>`;
+    r+=f(0,0)+f(cell*14,0)+f(0,cell*14)+`</svg>`; el.innerHTML=r;
   }
-  document.querySelectorAll('.qr').forEach((el, i) => makeQR(el, 7919 + i*131));
 
-  /* ===== 페이지 인디케이터 ===== */
-  const scroll = document.getElementById('scroll');
-  const total = scroll.querySelectorAll('.ticket').length;
-  const dotsEl = document.getElementById('dots');
-  for (let i = 0; i < total; i++) { const d = document.createElement('span'); d.className = 'dot' + (i===0?' on':''); dotsEl.appendChild(d); }
-  scroll.addEventListener('scroll', () => {
-    const idx = Math.round(scroll.scrollLeft / scroll.clientWidth);
-    document.getElementById('pagerLabel').textContent = (idx+1) + ' / ' + total;
-    dotsEl.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
-  });
+  /* ===== 화면(목업) 자동 렌더 ===== */
+  function renderMockup(){
+    const s = DATA.show, scroll = document.getElementById('scroll');
+    scroll.innerHTML = DATA.tickets.map(t => {
+      const used = t.status === 'used';
+      const statusHtml = used
+        ? `<div class="status used"><span class="ico">✓</span>사용완료${t.usedAt ? ' · ' + esc(t.usedAt) + ' 입장' : ''}</div>`
+        : `<div class="status unused"><span class="ico">●</span>입장 가능</div>`;
+      return `<div class="ticket${used?' is-used':''}">
+        <div class="show"><div class="poster">POSTER</div>
+          <div class="show-info"><div class="cat">${esc(s.category)}</div><div class="name">${esc(s.name)}</div>
+            <div class="meta">${esc(s.datetime)}<br>${esc(s.venue)}</div></div></div>
+        <div class="booking">
+          <div class="row"><span class="k">예매번호</span><span class="v">${esc(DATA.bookingNumber)}</span></div>
+          <div class="row"><span class="k">좌석</span><span class="v"><span class="seat-badge">${esc(t.seat)}</span></span></div>
+          <div class="row"><span class="k">매수</span><span class="v">1매 (${esc(t.index)})</span></div>
+        </div>
+        <div class="qr-area"><div class="qr" data-seed="${hashSeed(t.qrCode)}"></div><div class="qr-code">${esc(t.qrCode)}</div></div>
+        ${statusHtml}</div>`;
+    }).join('');
+    document.querySelectorAll('.qr').forEach(el => makeQR(el, parseInt(el.dataset.seed,10)));
 
-  /* ===== 설명 불러오기 (배포된 descriptions.json 우선, 없으면 localStorage) ===== */
-  const LS = 'beriz-ticket-storyboard';
-  const fields = () => document.querySelectorAll('textarea[data-key]');
-  function fill(data) { fields().forEach(t => { if (data && data[t.dataset.key] != null) t.value = data[t.dataset.key]; }); }
+    const total = DATA.tickets.length, dotsEl = document.getElementById('dots');
+    dotsEl.innerHTML = DATA.tickets.map((_,i)=>`<span class="dot${i===0?' on':''}"></span>`).join('');
+    document.getElementById('pagerLabel').textContent = '1 / ' + total;
+    scroll.onscroll = () => {
+      const idx = Math.round(scroll.scrollLeft / scroll.clientWidth);
+      document.getElementById('pagerLabel').textContent = (idx+1) + ' / ' + total;
+      dotsEl.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
+    };
+  }
 
-  async function loadDescriptions() {
+  /* ===== 설명 편집칸 자동 렌더 ===== */
+  const CIRCLED = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨'];
+  function renderDescriptions(){
+    document.getElementById('descList').innerHTML = DATA.components.map((c,i)=>
+      `<div class="desc-block"><span class="tag">${CIRCLED[i]||''} ${esc(c.label)}</span>
+        <textarea data-id="${esc(c.id)}" placeholder="${esc(c.label)} 설명을 적어주세요">${esc(c.description||'')}</textarea></div>`
+    ).join('');
+    if (location.search.includes('view'))
+      document.querySelectorAll('#descList textarea').forEach(t=>t.setAttribute('readonly',''));
+  }
+
+  /* ===== 데이터 불러오기 ===== */
+  async function load(){
     try {
-      const res = await fetch('descriptions.json?ts=' + Date.now());
-      if (res.ok) { fill(await res.json()); return; }
-    } catch (e) {}
-    // 로컬에서 파일로 열었을 때 등: localStorage 폴백
-    try { fill(JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
-  }
-  fields().forEach(t => t.addEventListener('input', () => {
-    const d = {}; fields().forEach(x => d[x.dataset.key] = x.value);
-    localStorage.setItem(LS, JSON.stringify(d));
-  }));
-
-  /* ===== 토큰 관리 ===== */
-  const TK = 'beriz-gh-token';
-  function saveToken() {
-    const v = document.getElementById('tokenInput').value.trim();
-    if (!v) return;
-    localStorage.setItem(TK, v);
-    document.getElementById('tokenInput').value = '';
-    setStatus('ok', '✅ 토큰이 저장됐어요. 이제 [저장 및 배포]를 쓸 수 있어요.');
-  }
-  function toggleSettings() {
-    const s = document.getElementById('settings'); s.classList.toggle('open');
-    if (localStorage.getItem(TK)) document.getElementById('tokenInput').placeholder = '••• 등록됨 (새로 바꾸려면 입력)';
-  }
-  function setStatus(cls, html) {
-    const el = document.getElementById('deployStatus'); el.className = 'deploy-status ' + cls; el.innerHTML = html;
+      const res = await fetch('storyboard.json?ts=' + Date.now());
+      DATA = await res.json();
+    } catch(e){ setStatus('err','storyboard.json 을 불러오지 못했어요.'); return; }
+    renderMockup(); renderDescriptions();
   }
 
-  /* ===== UTF-8 안전 base64 ===== */
-  function toB64(str) { return btoa(unescape(encodeURIComponent(str))); }
+  /* ===== 편집 내용을 DATA에 반영 ===== */
+  function syncDescriptions(){
+    document.querySelectorAll('#descList textarea').forEach(t=>{
+      const c = DATA.components.find(x=>x.id===t.dataset.id); if(c) c.description = t.value;
+    });
+  }
 
-  /* ===== 저장 및 배포 (GitHub Contents API) ===== */
-  async function deploy() {
+  /* ===== 위키용 마크다운 생성 ===== */
+  function toMarkdown(){
+    syncDescriptions(); const s = DATA.show;
+    let md = `# ${DATA.screen} (스토리보드)\n\n`;
+    md += `> **목적**: ${DATA.purpose}\n`;
+    md += `> **라이브 화면**: ${PAGES_URL}\n`;
+    if (DATA.updatedAt) md += `> **업데이트**: ${DATA.updatedAt}\n`;
+    md += `\n## 공연 / 예매 정보\n`;
+    md += `- 공연: ${s.name} (${s.category})\n- 일시: ${s.datetime}\n- 장소: ${s.venue}\n- 예매번호: ${DATA.bookingNumber}\n`;
+    md += `\n## 티켓 (${DATA.tickets.length}매)\n\n| # | 좌석 | 상태 |\n|---|------|------|\n`;
+    DATA.tickets.forEach(t => md += `| ${t.index} | ${t.seat} | ${t.status==='used'?'사용완료'+(t.usedAt?` (${t.usedAt})`:''):'입장 가능'} |\n`);
+    md += `\n## 화면 구성 요소\n`;
+    DATA.components.forEach((c,i)=> md += `\n### ${CIRCLED[i]||''} ${c.label}\n${c.description||'_(설명 없음)_'}\n`);
+    return md;
+  }
+  async function copyMarkdown(){
+    const md = toMarkdown();
+    try { await navigator.clipboard.writeText(md); setStatus('ok','📄 마크다운을 복사했어요. Confluence에 붙여넣으세요.'); }
+    catch(e){ setStatus('err','복사 실패 — 콘솔에 출력했어요(F12).'); console.log(md); }
+  }
+
+  /* ===== 토큰 / 상태 ===== */
+  const TK='beriz-gh-token';
+  function saveToken(){ const v=document.getElementById('tokenInput').value.trim(); if(!v)return; localStorage.setItem(TK,v); document.getElementById('tokenInput').value=''; setStatus('ok','✅ 토큰이 저장됐어요.'); }
+  function toggleSettings(){ const s=document.getElementById('settings'); s.classList.toggle('open'); if(localStorage.getItem(TK)) document.getElementById('tokenInput').placeholder='••• 등록됨 (바꾸려면 입력)'; }
+  function setStatus(cls,html){ const el=document.getElementById('deployStatus'); el.className='deploy-status '+cls; el.innerHTML=html; }
+  function toB64(str){ return btoa(unescape(encodeURIComponent(str))); }
+
+  /* ===== 저장 및 배포 (storyboard.json 커밋) ===== */
+  async function deploy(){
     const token = localStorage.getItem(TK);
-    if (!token) { toggleSettings(); setStatus('err', '먼저 ⚙️ 배포 설정에서 토큰을 등록해주세요.'); return; }
-
-    const btn = document.getElementById('deployBtn'); btn.disabled = true;
-    setStatus('busy', '⏳ 배포 중...');
-
-    const data = { updatedAt: new Date().toISOString() };
-    fields().forEach(t => data[t.dataset.key] = t.value);
-    const content = toB64(JSON.stringify(data, null, 2) + '\n');
-
+    if(!token){ toggleSettings(); setStatus('err','먼저 ⚙️ 배포 설정에서 토큰을 등록해주세요.'); return; }
+    const btn=document.getElementById('deployBtn'); btn.disabled=true; setStatus('busy','⏳ 배포 중...');
+    syncDescriptions();
+    DATA.updatedAt = new Date().toISOString();
+    const content = toB64(JSON.stringify(DATA, null, 2) + '\n');
     const api = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${REPO.path}`;
-    const headers = { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' };
-
+    const headers = { 'Authorization':'Bearer '+token, 'Accept':'application/vnd.github+json' };
     try {
-      // 1) 현재 파일 sha 조회
-      let sha = undefined;
-      const cur = await fetch(`${api}?ref=${REPO.branch}`, { headers });
-      if (cur.ok) sha = (await cur.json()).sha;
-      else if (cur.status === 401) throw new Error('토큰이 올바르지 않아요 (401). 토큰을 다시 등록해주세요.');
-
-      // 2) 커밋(업데이트)
-      const put = await fetch(api, {
-        method: 'PUT', headers,
-        body: JSON.stringify({
-          message: '스토리보드 설명 업데이트',
-          content, sha, branch: REPO.branch
-        })
-      });
-      if (!put.ok) {
-        const err = await put.json().catch(()=>({}));
-        throw new Error((err.message || put.status) + ' — 토큰 권한(Contents: write)을 확인해주세요.');
-      }
-      setStatus('ok', `✅ 배포 완료! 약 1분 뒤 반영됩니다. <a href="${PAGES_URL}" target="_blank">링크 열기</a><br><span style="color:var(--gray)">팀원에게 이 링크를 공유하세요.</span>`);
-    } catch (e) {
-      setStatus('err', '❌ ' + e.message);
-    } finally {
-      btn.disabled = false;
-    }
+      let sha; const cur = await fetch(`${api}?ref=${REPO.branch}`,{headers});
+      if(cur.ok) sha=(await cur.json()).sha;
+      else if(cur.status===401) throw new Error('토큰이 올바르지 않아요(401).');
+      const put = await fetch(api,{ method:'PUT', headers, body: JSON.stringify({ message:'스토리보드 업데이트', content, sha, branch:REPO.branch }) });
+      if(!put.ok){ const e=await put.json().catch(()=>({})); throw new Error((e.message||put.status)+' — 토큰 권한(Contents: write) 확인'); }
+      setStatus('ok',`✅ 배포 완료! 약 1분 뒤 반영됩니다. <a href="${PAGES_URL}" target="_blank">링크 열기</a>`);
+    } catch(e){ setStatus('err','❌ '+e.message); } finally { btn.disabled=false; }
   }
 
-  /* ===== 뷰어 모드 (?view) : 설명 읽기 전용 ===== */
-  if (location.search.includes('view')) {
-    document.body.classList.add('viewer');
-    fields().forEach(t => t.setAttribute('readonly', ''));
-  }
-
-  loadDescriptions();
+  if (location.search.includes('view')) document.body.classList.add('viewer');
+  load();
 </script>
 </body>
 </html>
